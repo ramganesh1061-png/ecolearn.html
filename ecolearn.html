@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoLearn - Sustainable Living Education</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #2d5a27;
+            --light-green: #4a7c59;
+            --accent-green: #7cb342;
+            --soft-green: #a8d5ba;
+            --earth-brown: #8d6e63;
+            --sky-blue: #87ceeb;
+            --warm-yellow: #ffd54f;
+            --cream: #f8f6f0;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--soft-green) 0%, var(--sky-blue) 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-radius: 0 0 30px 30px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-green);
+        }
+
+        .logo::before {
+            content: "🌱";
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            background: var(--accent-green);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .user-controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--accent-green);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        main {
+            padding: 2rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9));
+            border-radius: 30px;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .dashboard {
+            display: none;
+            grid-template-columns: 1fr 3fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .sidebar {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px var(--shadow);
+            height: fit-content;
+        }
+
+        .sidebar h3 {
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar li {
+            margin-bottom: 1rem;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: var(--text-dark);
+            padding: 0.7rem 1rem;
+            display: block;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background: var(--soft-green);
+            color: var(--primary-green);
+            transform: translateX(5px);
+        }
+
+        .content-area {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px var(--shadow);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-green), var(--warm-yellow));
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px var(--shadow);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-bar {
+            background: var(--cream);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), var(--warm-yellow));
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        .lesson-card {
+            background: var(--cream);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--accent-green);
+        }
+
+        .lesson-card:hover {
+            background: white;
+            transform: translateX(5px);
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, var(--sky-blue), var(--soft-green));
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: scale(1.02);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 40px var(--shadow);
+        }
+
+        .close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--soft-green);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-green);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--accent-green), var(--light-green));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-leaf {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <span class="floating-leaf" style="left: 10%; animation-delay: 0s;">🌿</span>
+        <span class="floating-leaf" style="left: 80%; animation-delay: 2s;">🍃</span>
+        <span class="floating-leaf" style="left: 60%; animation-delay: 4s;">🌱</span>
+        <span class="floating-leaf" style="left: 30%; animation-delay: 1s;">🌳</span>
+    </div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">EcoLearn</div>
+                <ul class="nav-links">
+                    <li><a href="#" onclick="showHome()">Home</a></li>
+                    <li><a href="#" onclick="showLessons()">Lessons</a></li>
+                    <li><a href="#" onclick="showProjects()">Projects</a></li>
+                    <li><a href="#" onclick="showProgress()">Progress</a></li>
+                </ul>
+                <div class="user-controls">
+                    <button class="btn btn-secondary" onclick="showLogin()" id="loginBtn">Login</button>
+                    <button class="btn btn-primary" onclick="showRegister()" id="registerBtn">Register</button>
+                    <button class="btn btn-primary hidden" onclick="showAdminPanel()" id="adminBtn">Admin</button>
+                    <button class="btn btn-secondary hidden" onclick="logout()" id="logoutBtn">Logout</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div id="home" class="page">
+                <div class="hero">
+                    <h1>Learn to Live Sustainably 🌍</h1>
+                    <p>Join thousands of students learning about renewable energy, waste reduction, and eco-friendly lifestyle choices. Start your journey towards a greener future today!</p>
+                    <button class="btn btn-primary" onclick="showLessons()">Start Learning</button>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">⚡</span>
+                        <h3>Renewable Energy</h3>
+                        <p>Learn about solar, wind, and other renewable energy sources. Understand how to implement clean energy solutions in your daily life.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%;"></div>
+                        </div>
+                        <button class="btn btn-primary">Explore Now</button>
+                    </div>
+
+                    <div class="feature-card">
+                        <span class="feature-icon">♻️</span>
+                        <h3>Waste Reduction</h3>
+                        <p>Master the art of reducing, reusing, and recycling. Discover innovative ways to minimize your environmental footprint.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 45%;"></div>
+                        </div>
+                        <button class="btn btn-primary">Learn More</button>
+                    </div>
+
+                    <div class="feature-card">
+                        <span class="feature-icon">🌱</span>
+                        <h3>Eco-Friendly Living</h3>
+                        <p>Transform your lifestyle with sustainable practices. From green transportation to organic gardening tips.</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80%;"></div>
+                        </div>
+                        <button class="btn btn-primary">Get Started</button>
+                    </div>
+
+                    <div class="feature-card">
+                        <span class="feature-icon">🏗️</span>
+                        <h3>Hands-on Projects</h3>
+                        <p>Apply your knowledge with real-world projects. Build solar chargers, create compost systems, and more!</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 30%;"></div>
+                        </div>
+                        <button class="btn btn-primary">View Projects</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dashboard" class="dashboard">
+                <aside class="sidebar">
+                    <h3>🎯 Your Learning Path</h3>
+                    <ul>
+                        <li><a href="#" onclick="showLessons()" class="active">📚 Lessons</a></li>
+                        <li><a href="#" onclick="showProjects()">🔬 Projects</a></li>
+                        <li><a href="#" onclick="showProgress()">📈 Progress</a></li>
+                        <li><a href="#" onclick="showResources()">📖 Resources</a></li>
+                    </ul>
+
+                    <h3 style="margin-top: 2rem;">🏆 Achievements</h3>
+                    <ul>
+                        <li><a href="#">🌟 First Lesson Complete</a></li>
+                        <li><a href="#">⚡ Energy Expert</a></li>
+                        <li><a href="#">♻️ Waste Warrior</a></li>
+                    </ul>
+                </aside>
+
+                <div class="content-area">
+                    <div id="lessons-content">
+                        <h2>📚 Interactive Lessons</h2>
+                        <div class="lesson-card" onclick="openLesson('renewable-energy')">
+                            <h4>⚡ Introduction to Renewable Energy</h4>
+                            <p>Learn the basics of solar, wind, and hydroelectric power</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%;"></div>
+                            </div>
+                            <small>Completed • 45 minutes</small>
+                        </div>
+
+                        <div class="lesson-card" onclick="openLesson('waste-management')">
+                            <h4>♻️ Effective Waste Management</h4>
+                            <p>Master the 5 R's: Refuse, Reduce, Reuse, Recycle, Rot</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%;"></div>
+                            </div>
+                            <small>In Progress • 30 minutes</small>
+                        </div>
+
+                        <div class="lesson-card" onclick="openLesson('sustainable-transport')">
+                            <h4>🚲 Sustainable Transportation</h4>
+                            <p>Explore eco-friendly ways to get around your city</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%;"></div>
+                            </div>
+                            <small>Not Started • 35 minutes</small>
+                        </div>
+                    </div>
+
+                    <div id="projects-content" class="hidden">
+                        <h2>🔬 Hands-on Projects</h2>
+                        <div class="project-card">
+                            <h4>🌞 Build a Solar Phone Charger</h4>
+                            <p>Create your own portable solar charging station using basic materials</p>
+                            <strong>Difficulty: Beginner • Duration: 2 hours</strong>
+                        </div>
+
+                        <div class="project-card">
+                            <h4>🌿 Start a Compost System</h4>
+                            <p>Set up an efficient composting system for your home</p>
+                            <strong>Difficulty: Easy • Duration: 1 hour setup</strong>
+                        </div>
+
+                        <div class="project-card">
+                            <h4>💧 Water Conservation Audit</h4>
+                            <p>Conduct a comprehensive water usage audit of your home</p>
+                            <strong>Difficulty: Intermediate • Duration: 3 hours</strong>
+                        </div>
+                    </div>
+
+                    <div id="progress-content" class="hidden">
+                        <h2>📈 Your Progress</h2>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <span class="stat-number">12</span>
+                                <span>Lessons Completed</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-number">5</span>
+                                <span>Projects Finished</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-number">850</span>
+                                <span>Points Earned</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-number">Level 3</span>
+                                <span>Eco Warrior</span>
+                            </div>
+                        </div>
+
+                        <h3>🎯 Current Goals</h3>
+                        <div class="lesson-card">
+                            <h4>Complete Water Conservation Module</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%;"></div>
+                            </div>
+                            <small>3 of 4 lessons completed</small>
+                        </div>
+                    </div>
+
+                    <div id="admin-content" class="hidden">
+                        <h2>🛠️ Admin Panel</h2>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <span class="stat-number">1,247</span>
+                                <span>Total Users</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-number">89</span>
+                                <span>Active Lessons</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-number">156</span>
+                                <span>Projects</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-number">94%</span>
+                                <span>Engagement Rate</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 2rem;">
+                            <button class="btn btn-primary" onclick="showAddContent()">+ Add New Content</button>
+                            <button class="btn btn-secondary" onclick="showUserManagement()">👥 Manage Users</button>
+                            <button class="btn btn-secondary" onclick="showAnalytics()">📊 View Analytics</button>
+                        </div>
+
+                        <div style="margin-top: 2rem;">
+                            <h3>Recent Activity</h3>
+                            <div class="lesson-card">
+                                <h4>New user registration: john_eco@email.com</h4>
+                                <small>5 minutes ago</small>
+                            </div>
+                            <div class="lesson-card">
+                                <h4>Lesson "Solar Energy Basics" completed by 23 users today</h4>
+                                <small>2 hours ago</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>🌱 Welcome Back</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email:</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password:</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2>🌿 Join EcoLearn</h2>
+            <form onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="registerName">Full Name:</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email:</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password:</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="userType">I am a:</label>
+                    <select id="userType" required>
+                        <option value="">Select...</option>
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="admin">Administrator</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = null;
+        let users = [];
+        let lessons = [
+            { id: 'renewable-energy', title: 'Renewable Energy', progress: 100 },
+            { id: 'waste-management', title: 'Waste Management', progress: 60 },
+            { id: 'sustainable-transport', title: 'Sustainable Transport', progress: 0 }
+        ];
+
+        // Navigation functions
+        function showHome() {
+            document.getElementById('home').style.display = 'block';
+            document.getElementById('dashboard').style.display = 'none';
+        }
+
+        function showLessons() {
+            if (!currentUser) {
+                showLogin();
+                return;
+            }
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'grid';
+            showContent('lessons');
+        }
+
+        function showProjects() {
+            if (!currentUser) {
+                showLogin();
+                return;
+            }
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'grid';
+            showContent('projects');
+        }
+
+        function showProgress() {
+            if (!currentUser) {
+                showLogin();
+                return;
+            }
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'grid';
+            showContent('progress');
+        }
+
+        function showAdminPanel() {
+            if (!currentUser || currentUser.type !== 'admin') {
+                alert('Admin access required!');
+                return;
+            }
+            document.getElementById('home').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'grid';
+            showContent('admin');
+        }
+
+        function showContent(contentType) {
+            // Hide all content areas
+            document.getElementById('lessons-content').classList.add('hidden');
+            document.getElementById('projects-content').classList.add('hidden');
+            document.getElementById('progress-content').classList.add('hidden');
+            document.getElementById('admin-content').classList.add('hidden');
+
+            // Show selected content
+            document.getElementById(contentType + '-content').classList.remove('hidden');
+
+            // Update sidebar active state
+            document.querySelectorAll('.sidebar a').forEach(link => {
+                link.classList.remove('active');
+            });
+        }
+
+        // Modal functions
+        function showLogin() {
+            document.getElementById('loginModal').style.display = 'block';
+        }
+
+        function showRegister() {
+            document.getElementById('registerModal').style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Simple authentication (in real app, this would be server-side)
+            if (email === 'admin@ecolearn.com' && password === 'admin123') {
+                currentUser = { email: email, name: 'Admin User', type: 'admin' };
+                updateAuthUI();
+                closeModal('loginModal');
+                showLessons();
+            } else if (email && password) {
+                currentUser = { email: email, name: 'Eco Student', type: 'student' };
+                updateAuthUI();
+                closeModal('loginModal');
+                showLessons();
+            } else {
+                alert('Please enter valid credentials');
+            }
+        }
+
+        function handleRegister(event) {
+            event.preventDefault();
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const userType = document.getElementById('userType').value;
+
+            if (name && email && password && userType) {
+                currentUser = { email: email, name: name, type: userType };
+                users.push(currentUser);
+                updateAuthUI();
+                closeModal('registerModal');
+                showLessons();
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            updateAuthUI();
+            showHome();
+        }
+
+        function updateAuthUI() {
+            if (currentUser) {
+                document.getElementById('loginBtn').classList.add('hidden');
+                document.getElementById('registerBtn').classList.add('hidden');
+                document.getElementById('logoutBtn').classList.remove('hidden');
+                
+                if (currentUser.type === 'admin') {
+                    document.getElementById('adminBtn').classList.remove('hidden');
+                }
+            } else {
+                document.getElementById('loginBtn').classList.remove('hidden');
+                document.getElementById('registerBtn').classList.remove('hidden');
+                document.getElementById('logoutBtn').classList.add('hidden');
+                document.getElementById('adminBtn').classList.add('hidden');
+            }
+        }
+
+        function openLesson(lessonId) {
+            alert(`Opening lesson: ${lessonId}\nThis would navigate to the interactive lesson content!`);
+        }
+
+        function showAddContent() {
+            alert('Add Content Modal would open here - allowing admins to create new lessons and projects');
+        }
+
+        function showUserManagement() {
+            alert('User Management Panel would open here - showing all registered users and their progress');
+        }
+
+        function showAnalytics() {
+            alert('Analytics Dashboard would open here - showing user engagement, lesson completion rates, and learning outcomes');
+        }
+
+        // Interactive features
+        function animateProgressBars() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        }
+
+        // Initialize floating animations
+        function initFloatingElements() {
+            const leaves = document.querySelectorAll('.floating-leaf');
+            leaves.forEach((leaf, index) => {
+                leaf.style.top = Math.random() * 100 + '%';
+                leaf.style.animationDelay = Math.random() * 6 + 's';
+                leaf.style.animationDuration = (4 + Math.random() * 4) + 's';
+            });
+        }
+
+        // Search functionality
+        function addSearchFeature() {
+            const searchHTML = `
+                <div class="search-container" style="margin-bottom: 2rem;">
+                    <input type="text" id="searchInput" placeholder="🔍 Search lessons, projects, or topics..." 
+                           style="width: 100%; padding: 1rem; border: 2px solid var(--soft-green); border-radius: 25px; font-size: 1rem;">
+                </div>
+            `;
+            
+            const contentAreas = document.querySelectorAll('.content-area > div:not(.hidden)');
+            contentAreas.forEach(area => {
+                if (!area.querySelector('.search-container')) {
+                    area.insertAdjacentHTML('afterbegin', searchHTML);
+                }
+            });
+        }
+
+        // Lesson interaction
+        function simulateLessonProgress(lessonId) {
+            const lesson = lessons.find(l => l.id === lessonId);
+            if (lesson && lesson.progress < 100) {
+                lesson.progress = Math.min(lesson.progress + 20, 100);
+                updateLessonDisplay();
+            }
+        }
+
+        function updateLessonDisplay() {
+            // This would update the lesson cards with new progress
+            console.log('Updating lesson display with current progress');
+        }
+
+        // Gamification features
+        function showAchievement(title, description) {
+            const achievementHTML = `
+                <div class="achievement-popup" style="
+                    position: fixed; 
+                    top: 20px; 
+                    right: 20px; 
+                    background: linear-gradient(135deg, var(--accent-green), var(--warm-yellow)); 
+                    color: white; 
+                    padding: 1rem 2rem; 
+                    border-radius: 15px; 
+                    box-shadow: 0 10px 25px var(--shadow);
+                    z-index: 3000;
+                    transform: translateX(400px);
+                    transition: transform 0.5s ease;
+                ">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <span style="font-size: 2rem;">🏆</span>
+                        <div>
+                            <h4 style="margin: 0; font-size: 1.1rem;">${title}</h4>
+                            <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">${description}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.insertAdjacentHTML('beforeend', achievementHTML);
+            const popup = document.querySelector('.achievement-popup');
+            
+            setTimeout(() => {
+                popup.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                popup.style.transform = 'translateX(400px)';
+                setTimeout(() => popup.remove(), 500);
+            }, 3000);
+        }
+
+        // Resource management for admins
+        function manageResources() {
+            if (currentUser && currentUser.type === 'admin') {
+                const resourceTypes = ['Videos', 'Articles', 'Infographics', 'Quizzes', 'Interactive Tools'];
+                console.log('Managing resources:', resourceTypes);
+            }
+        }
+
+        // Progress tracking
+        function trackUserProgress(action, details) {
+            if (currentUser) {
+                const timestamp = new Date().toISOString();
+                const progressData = {
+                    user: currentUser.email,
+                    action: action,
+                    details: details,
+                    timestamp: timestamp
+                };
+                console.log('Progress tracked:', progressData);
+                
+                // Trigger achievements
+                if (action === 'lesson_completed') {
+                    showAchievement('Lesson Complete!', 'You completed a sustainability lesson');
+                }
+            }
+        }
+
+        // Theme switcher (bonus feature)
+        function addThemeToggle() {
+            const themeToggle = `
+                <button id="themeToggle" onclick="toggleTheme()" style="
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: var(--accent-green);
+                    color: white;
+                    border: none;
+                    border-radius: 50%;
+                    width: 60px;
+                    height: 60px;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    box-shadow: 0 5px 15px var(--shadow);
+                    transition: all 0.3s ease;
+                    z-index: 1000;
+                ">🌙</button>
+            `;
+            document.body.insertAdjacentHTML('beforeend', themeToggle);
+        }
+
+        function toggleTheme() {
+            const root = document.documentElement;
+            const themeButton = document.getElementById('themeToggle');
+            
+            if (document.body.classList.contains('dark-theme')) {
+                document.body.classList.remove('dark-theme');
+                themeButton.innerHTML = '🌙';
+                root.style.setProperty('--primary-green', '#2d5a27');
+                root.style.setProperty('--light-green', '#4a7c59');
+                root.style.setProperty('--text-dark', '#2c3e50');
+            } else {
+                document.body.classList.add('dark-theme');
+                themeButton.innerHTML = '☀️';
+                root.style.setProperty('--primary-green', '#4a7c59');
+                root.style.setProperty('--light-green', '#2d5a27');
+                root.style.setProperty('--text-dark', '#ecf0f1');
+            }
+        }
+
+        // Offline capability simulation
+        function checkConnectivity() {
+            const isOnline = navigator.onLine;
+            if (!isOnline) {
+                showOfflineMessage();
+            }
+        }
+
+        function showOfflineMessage() {
+            const offlineHTML = `
+                <div id="offlineAlert" style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    background: var(--earth-brown);
+                    color: white;
+                    padding: 1rem;
+                    text-align: center;
+                    z-index: 2000;
+                    transform: translateY(-100%);
+                    transition: transform 0.3s ease;
+                ">
+                    📶 You're offline - Some features may be limited
+                </div>
+            `;
+            
+            if (!document.getElementById('offlineAlert')) {
+                document.body.insertAdjacentHTML('afterbegin', offlineHTML);
+                setTimeout(() => {
+                    document.getElementById('offlineAlert').style.transform = 'translateY(0)';
+                }, 100);
+            }
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            initFloatingElements();
+            animateProgressBars();
+            addThemeToggle();
+            
+            // Check connectivity
+            window.addEventListener('online', () => {
+                const alert = document.getElementById('offlineAlert');
+                if (alert) alert.remove();
+            });
+            
+            window.addEventListener('offline', showOfflineMessage);
+            
+            // Add some interactive hover effects
+            document.querySelectorAll('.feature-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Simulate loading content
+            setTimeout(() => {
+                animateProgressBars();
+            }, 1000);
+            
+            // Add periodic progress updates
+            setInterval(() => {
+                if (currentUser) {
+                    // Simulate some background progress updates
+                    const randomUpdate = Math.random();
+                    if (randomUpdate > 0.98) {
+                        showAchievement('Daily Goal!', 'You\'ve spent 30 minutes learning today');
+                    }
+                }
+            }, 30000); // Check every 30 seconds
+        });
+
+        // Handle modal clicks outside content
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey || event.metaKey) {
+                switch(event.key) {
+                    case 'h':
+                        event.preventDefault();
+                        showHome();
+                        break;
+                    case 'l':
+                        event.preventDefault();
+                        showLessons();
+                        break;
+                    case 'p':
+                        event.preventDefault();
+                        showProjects();
+                        break;
+                }
+            }
+            
+            // ESC to close modals
+            if (event.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.style.display = 'none';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
